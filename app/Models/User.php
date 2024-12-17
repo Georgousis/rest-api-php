@@ -9,22 +9,40 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Model
 {
     use SoftDeletes;
-    protected  $table = 'users';
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'first_name',
         'last_name',
         'email'
     ];
 
-    public function orders():HasMany
+    /**
+     * Get the orders the user placed
+     */
+
+    public function orders(): HasMany
     {
-        return $this -> hasMany(Order::class , 'user_id');
+        return $this->hasMany(Order::class, 'user_id');
     }
 
-    public function addresses():HasMany
+    /**
+     * Get the addresses the user created
+     */
+
+    public function addresses(): HasMany
     {
-        return $this -> hasMany(  Address::class , 'user_id');
+        return $this->hasMany(Address::class, 'user_id');
     }
 }
 
